@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- <meta http-equiv="Permissions-Policy" content="screen-wake-lock=(self)"> -->
+
+  <title><%= projectName %></title>
+  
+  <!-- <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAADXElEQVR4nH2Ta2yTBRSG3/NdelvX3UprGlaHTliYw8kmY4YxmJAQByYu1D+g0TkHCS5GTbwF/YKXmBgXFmMYJirExGDwQkSIjiZUNkUchY3INlq7i66167qyrbTr/Tv+qGKMxPPnJOd9zvvvAf5nmFlkdkl8HKJLgQQADBAz6F+gokBwKZBcLkW6+axAuEUnAQRA+KfhVuDfN2ZuYT57hD1NJyd6TXtAIpQtsHc/jG35HEQA4P7AdKedSzpztY7IbQ0FPURvpjna/d54/+WuH678hJTXj9YaG969oN39xK6G9sq19fU9L76x70xw1WcYeL98w3c7NYt76yg853ubfX07Ho+eb3v546cruBh4DYAVgH3bKvE8gK2fvNJ09pev9ixtr9V2AAQh5c/1ZkqLeChtfMyk88YCU2PPfXlqcH/P98YnF6B/nTlQwnzSWtXV+xTzCR0KpSHnOeelVx+5u1m5n43Uts4w2Nkq3TfrpVBjQ8Y67UsitXxZqqqyMlJk14wMDGib720q06iZxdjoxYhRMGk4ecGHYpNKp6blnQSUlJtsme0Os/zC5vJYhT+QxZpGbW4skBQb7tLiSjTrq7fAvrCoyjeyHC01a7TJoCzaigT56HTBIBEBzMChR8Xw6hrR3H1MHN71YEHt0HA8e3uhmmuulrXDUxpMXM8mgin1ukbIGUqteu1Vv370eF9gr6SqEIigCy+TZ85cS3q/GcKWkZlE58ZyqV3OCSv7L8Uyk1nMW40wHDqB9QD8QMIKYJYITIBDBD7PAbbGZ57f905LS+1v0lI8EzrX4Zj0xvQrNu1OT3rjHk1ZwZqNzY194Yga+vCtg/udEz7/hqZmiZiZiEj46GCHU209vPm0ewY7zDfgD47g93Qp7qiuw2phEksJHU4nLXiprhDuT7t+bH/28CZmVgVRlBiAYfbX+LqZi7PpKed4cqUpl/KMy1mLoTo7PxbJHv3iWnq5Xs26jlxOqotIhjwLawEYRVFSSVFYOHCAqL6m+tsV9zi2yrpiPLS+EIM/D+MPsQoCqaiAB2EuQ8gfR7HZiFH3sX73Vc8DiqKoeTMAFYDFCLTJAnheBUkAzNp8OpcAdAAsJeC5eVAU+BpAEIBwUyoiAjP9JWx+/UdEMAACEYM5D/wJz994MzAxtrsAAAAASUVORK5CYII=" type="image/png">
+  <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAADXElEQVR4nH2Ta2yTBRSG3/NdelvX3UprGlaHTliYw8kmY4YxmJAQByYu1D+g0TkHCS5GTbwF/YKXmBgXFmMYJirExGDwQkSIjiZUNkUchY3INlq7i66167qyrbTr/Tv+qGKMxPPnJOd9zvvvAf5nmFlkdkl8HKJLgQQADBAz6F+gokBwKZBcLkW6+axAuEUnAQRA+KfhVuDfN2ZuYT57hD1NJyd6TXtAIpQtsHc/jG35HEQA4P7AdKedSzpztY7IbQ0FPURvpjna/d54/+WuH678hJTXj9YaG969oN39xK6G9sq19fU9L76x70xw1WcYeL98w3c7NYt76yg853ubfX07Ho+eb3v546cruBh4DYAVgH3bKvE8gK2fvNJ09pev9ixtr9V2AAQh5c/1ZkqLeChtfMyk88YCU2PPfXlqcH/P98YnF6B/nTlQwnzSWtXV+xTzCR0KpSHnOeelVx+5u1m5n43Uts4w2Nkq3TfrpVBjQ8Y67UsitXxZqqqyMlJk14wMDGib720q06iZxdjoxYhRMGk4ecGHYpNKp6blnQSUlJtsme0Os/zC5vJYhT+QxZpGbW4skBQb7tLiSjTrq7fAvrCoyjeyHC01a7TJoCzaigT56HTBIBEBzMChR8Xw6hrR3H1MHN71YEHt0HA8e3uhmmuulrXDUxpMXM8mgin1ukbIGUqteu1Vv370eF9gr6SqEIigCy+TZ85cS3q/GcKWkZlE58ZyqV3OCSv7L8Uyk1nMW40wHDqB9QD8QMIKYJYITIBDBD7PAbbGZ57f905LS+1v0lI8EzrX4Zj0xvQrNu1OT3rjHk1ZwZqNzY194Yga+vCtg/udEz7/hqZmiZiZiEj46GCHU209vPm0ewY7zDfgD47g93Qp7qiuw2phEksJHU4nLXiprhDuT7t+bH/28CZmVgVRlBiAYfbX+LqZi7PpKed4cqUpl/KMy1mLoTo7PxbJHv3iWnq5Xs26jlxOqotIhjwLawEYRVFSSVFYOHCAqL6m+tsV9zi2yrpiPLS+EIM/D+MPsQoCqaiAB2EuQ8gfR7HZiFH3sX73Vc8DiqKoeTMAFYDFCLTJAnheBUkAzNp8OpcAdAAsJeC5eVAU+BpAEIBwUyoiAjP9JWx+/UdEMAACEYM5D/wJz994MzAxtrsAAAAASUVORK5CYII=" type="image/png">
+     -->
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+  <link rel="apple-touch-icon" href="favicon.ico" />
+
+
+  <!--http://www.html5rocks.com/en/mobile/mobifying/-->
+  <meta name="viewport"
+        content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1,minimal-ui=true"/>
+
+  <!--https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- force webkit on 360 -->
+  <meta name="renderer" content="webkit"/>
+  <meta name="force-rendering" content="webkit"/>
+  <!-- force edge on IE -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <!-- force full screen on some browser -->
+  <meta name="full-screen" content="yes"/>
+  <meta name="x5-fullscreen" content="true"/>
+  <meta name="360-fullscreen" content="true"/>
+
+  <!--fix fireball/issues/3568 -->
+  <!--<meta name="browsermode" content="application">-->
+  <meta name="x5-page-mode" content="app">
+  <meta http-equiv="Permissions-Policy" content="screen-wake-lock=(self), clipboard-read=(self), clipboard-write=(self)">
+
+  <!--<link rel="apple-touch-icon" href=".png" />-->
+  <!--<link rel="apple-touch-icon-precomposed" href=".png" />-->
+
+  <link rel="stylesheet" type="text/css" href="<%= cssUrl %>"/>
+
+</head>
+<body>
+  <div id="GameDiv" cc_exact_fit_screen="true">
+      <div id="Cocos3dGameContainer">
+        <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="99"></canvas>
+      </div>
+    </div>
+  <%- include(cocosTemplate, {}) %>
+
+
+<!-- <iframe 
+    id="web_iframe" 
+    src=""
+    draggable="false"
+    style="
+        width: 100%; 
+        height: 100%; 
+        position: absolute; 
+        display: none; /* 初始隐藏，加载完再显示 */
+        border: none; 
+        background-color: rgb(0, 0, 0);
+        top: 0;
+        left: 0;
+    "
+    allow="screen-wake-lock; clipboard-read; clipboard-write;"
+    sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"
+></iframe> -->
+
+
+
+
+</body>
+</html>
