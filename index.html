@@ -4,11 +4,15 @@
   <meta charset="utf-8">
   <title>Vegas Fox</title>
 
-  <link rel="icon" href="icon_192.b0ed3.png" sizes="192x192" type="image/png" />
-  <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /> -->
 
-  <!-- <link rel="apple-touch-icon" href="favicon.ico" /> -->
- <link rel="apple-touch-icon" href="icon_192.b0ed3.png" sizes="192x192" type="image/png" />
+ <link rel="icon" href="icon_192.5dd0a.webp" type="image/webp" />
+ <link id="cc-pwa-icon-192" rel="icon" href="icon_192.5dd0a.webp" type="image/webp" />
+ <link id="cc-pwa-icon-512" rel="alternate" href="icon_512.55f01.webp" type="image/webp" />
+ <link id="cc-pwa-sw" rel="alternate" href="sw.2a350.js" type="application/javascript" />
+ <link rel="apple-touch-icon" href="icon_192.5dd0a.webp" sizes="192x192" type="image/webp" />
+
+ <!-- <link rel="manifest" href="https://webtest.gingame.top/web_test2/manifest.webmanifest"> -->
+ <link rel="manifest" href="https://binisgood.github.io/web_spin/manifest.webmanifest">
 
   <meta name="viewport"
         content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1,minimal-ui=true"/>
@@ -18,6 +22,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="format-detection" content="telephone=no">
   <meta name="apple-mobile-web-app-title" content="Vegas Fox">
+  <meta name="theme-color" content="#000A1B">
 
   <!-- force webkit on 360 -->
   <meta name="renderer" content="webkit"/>
@@ -43,96 +48,250 @@
       position: fixed; overflow: hidden;
       -webkit-overflow-scrolling: touch;
       user-select: none; -webkit-user-select: none;
-      background-color: #000A1B; /* 防止加载前白屏 */
+      background-color: #000A1B; 
     }
     #GameDiv { width: 100%; height: 100%; }
 
     /* ========= loading style ========== */
     #loading-mask {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #000A1B; /* 与游戏背景色一致 */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999; /* 确保在最上层 */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000A1B;
+        z-index: 9999;
+        display: block; 
     }
 
-
-
-/* 3. 文本优化：金色霓虹风 (Vegas Fox 主题) */
     .loading-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: clamp(100px, calc(206 / 750 * 100vw), 206px);
         font-family: Helvetica, Arial, sans-serif;
-        font-size: 24px; /* 加大字号 */
-        font-weight: 700;
+        font-size: 16px;
+        font-weight: 100;
         letter-spacing: 3px;
         text-transform: uppercase;
-        color: #fff; /* 基色为白 */
-        margin-bottom: 30px;
-        
-        /* 霓虹光晕效果 */
+        color: #fff;
         text-shadow:
             0 0 5px #fff,
-            0 0 10px #ff00ff, /* 紫红霓虹芯 */
+            0 0 10px #ff00ff,
             0 0 15px #ff00ff,
             0 0 20px #ff00ff,
-            0 0 30px #ffd700, /* 最外层金色霓虹光暈 */
+            0 0 30px #ffd700,
             0 0 40px #ffd700;
-            
-        /* 加一个呼吸闪烁动画，避免玩家认为卡死 */
         animation: pulseNeon 1.8s infinite;
+        white-space: nowrap; 
     }
 
-    /* 4. Loading 圈优化：霓虹渐变 + 光晕 */
-    .loading-spinner {
-        width: 60px; /* 加大尺寸 */
-        height: 60px;
-        border-radius: 50%;
-        position: relative;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0) 60%, rgba(255, 0, 255, 0.4) 62%);
-        
-        /* 增加一个内部的霓虹光晕 */
-        box-shadow: 0 0 15px #ff00ff, inset 0 0 5px #ff00ff;
-        
-        animation: spin 0.8s linear infinite;
-    }
-    
-    .loading-spinner::after {
-        content: '';
+    .loading-logo {
         position: absolute;
-        top: -4px; left: -4px; right: -4px; bottom: -4px;
-        border-radius: 50%;
-        border: 4px solid transparent;
-        border-top-color: #ffd700; /* 金色霓虹芯 */
-        box-shadow: 0 0 10px #ffd700;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+        width: calc(476 / 750 * 100vw);
+        max-width: 476px; 
+        max-height: 371px;
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 0 3px #a855f7) drop-shadow(0 0 6px #a855f7);
+        opacity: 0;
+        animation: logoFadeIn 2.8s ease forwards;
+        margin: 0; 
     }
 
-    /* 5. 动画定义 */
-    @keyframes spin { 
-        to { transform: rotate(360deg); } 
+    @keyframes logoFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
-    
+
     @keyframes pulseNeon {
         0% { opacity: 0.6; text-shadow: 0 0 5px #fff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ffd700; }
         50% { opacity: 1; text-shadow: 0 0 7px #fff, 0 0 15px #ff00ff, 0 0 30px #ff00ff, 0 0 50px #ffd700; }
         100% { opacity: 0.6; text-shadow: 0 0 5px #fff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ffd700; }
     }
-
-
-
   </style>
 
-  <link rel="stylesheet" type="text/css" href="style.f76d1.css"/>
 
+  <link rel="stylesheet" type="text/css" href="style.f76d1.css"/>
+  <!-- TODO -->
+
+  <script>
+    (function() {
+      const MANIFEST_LINK_ID = "cc-dynamic-manifest";
+      let currentManifestObjectUrl = "";
+
+      function buildManifestConfig(targetUrl) {
+        return {
+          "description": "Vegas Fox is a fast portrait-first web app with installable full-screen gameplay.",
+          "id": targetUrl,
+          "name": "Vegas Fox",
+          "short_name": "Vegas Fox",
+          "start_url": targetUrl,
+          "scope": "index.57a06.js/",
+          "display": "standalone",
+          "display_override": [
+            "standalone",
+            "minimal-ui",
+            "browser"
+          ],
+          "orientation": "portrait",
+          "background_color": "#000A1B",
+          "theme_color": "#000A1B",
+          "categories": [
+            "games",
+            "entertainment"
+          ],
+          "prefer_related_applications": false,
+          "related_applications": [
+            {
+              "platform": "webapp",
+              "url": targetUrl,
+              "id": targetUrl
+            }
+          ],
+          "icons": [
+            {
+              "src": "./icon_192.5dd0a.webp",
+              "sizes": "192x192",
+              "type": "image/webp",
+              "purpose": "any"
+            },
+            {
+              "src": "./icon_512.55f01.webp",
+              "sizes": "512x512",
+              "type": "image/webp",
+              "purpose": "any"
+            }
+          ],
+          "screenshots": [
+            {
+              "src": "./install_shot_mobile_1.7576e.webp",
+              "sizes": "1080x1920",
+              "type": "image/webp",
+              "form_factor": "narrow",
+              "label": "Mobile install preview 1"
+            },
+            {
+              "src": "./install_shot_mobile_2.3b4b4.webp",
+              "sizes": "1080x1920",
+              "type": "image/webp",
+              "form_factor": "narrow",
+              "label": "Mobile install preview 2"
+            },
+            {
+              "src": "./install_shot_mobile_3.b6ab1.webp",
+              "sizes": "1080x1920",
+              "type": "image/webp",
+              "form_factor": "narrow",
+              "label": "Mobile install preview 3"
+            },
+            {
+              "src": "./install_shot_mobile_4.4cb7f.webp",
+              "sizes": "1080x1920",
+              "type": "image/webp",
+              "form_factor": "narrow",
+              "label": "Mobile install preview 4"
+            },
+            {
+              "src": "./install_shot_mobile_5.d3d60.webp",
+              "sizes": "1080x1920",
+              "type": "image/webp",
+              "form_factor": "narrow",
+              "label": "Mobile install preview 5"
+            },
+            {
+              "src": "./install_shot_desktop.20403.webp",
+              "sizes": "1600x900",
+              "type": "image/webp",
+              "form_factor": "wide",
+              "label": "Desktop install preview"
+            }
+          ]
+        };
+      }
+
+      function ensureManifestLink() {
+        let link = document.getElementById(MANIFEST_LINK_ID);
+        if (!link) {
+          link = document.querySelector('link[rel="manifest"]');
+        }
+
+        if (!link) {
+          link = document.createElement('link');
+          link.rel = 'manifest';
+          document.head.appendChild(link);
+        }
+
+        link.id = MANIFEST_LINK_ID;
+        return link;
+      }
+
+      function cleanupPreviousManifestUrl() {
+        if (!currentManifestObjectUrl) {
+          return;
+        }
+
+        URL.revokeObjectURL(currentManifestObjectUrl);
+        currentManifestObjectUrl = "";
+      }
+
+      function updatePwaManifest(url) {
+        const targetUrl = url || window.location.href;
+
+        try {
+          const manifestConfig = buildManifestConfig(targetUrl);
+          const manifestStr = JSON.stringify(manifestConfig);
+          const blob = new Blob([manifestStr], { type: 'application/manifest+json' });
+          const manifestUrl = URL.createObjectURL(blob);
+          const link = ensureManifestLink();
+
+          cleanupPreviousManifestUrl();
+          link.href = manifestUrl;
+          currentManifestObjectUrl = manifestUrl;
+          window.__CC_DYNAMIC_PWA_MANIFEST_URL__ = manifestUrl;
+          window.__CC_DYNAMIC_PWA_START_URL__ = targetUrl;
+          console.log("Success: PWA manifest injected with parameters.", targetUrl);
+          return manifestUrl;
+        } catch (e) {
+          console.error("Failed to inject manifest:", e);
+          return "";
+        }
+      }
+
+      function testFunc(url){
+        console.log("url:"+url);
+        alert("url:"+url);
+      }
+      // window.updatePwaManifest = updatePwaManifest;
+      window.updatePwaManifest = testFunc;
+      // updatePwaManifest();
+    })();
+  </script> 
+
+
+
+
+  <script type="module" src="pwa-install-bridge.c4161.js"></script> 
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC22P6098V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-NC22P6098V');
+  </script>
 </head>
 <body>
+  <audio id="bgm_global" src="b.f17a2.mp3"></audio>
+
   <div id="loading-mask">
+    <img src="logo.d20c7.webp" alt="" class="loading-logo">
     <div class="loading-text">Loading...</div>
-    <div class="loading-spinner"></div>
   </div>
 
   <div id="GameDiv" cc_exact_fit_screen="true">
@@ -140,7 +299,88 @@
         <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="99"></canvas>
       </div>
     </div>
+  <script>
+    (function () {
+      const ORIENTATION_EVENT_NAME = "cc-orientation-change";
+      let currentOrientationState = null;
+
+      function buildOrientationState() {
+        const screenOrientation = window.screen && window.screen.orientation ? window.screen.orientation : null;
+        const orientationType = screenOrientation && typeof screenOrientation.type === "string"
+          ? screenOrientation.type
+          : "";
+        const orientationAngle = screenOrientation && typeof screenOrientation.angle === "number"
+          ? screenOrientation.angle
+          : (typeof window.orientation === "number" ? window.orientation : 0);
+
+        let isPortrait = false;
+        let source = "viewport";
+
+        if (orientationType) {
+          isPortrait = orientationType.indexOf("portrait") === 0;
+          source = "screen.orientation";
+        } else if (typeof window.matchMedia === "function") {
+          isPortrait = window.matchMedia("(orientation: portrait)").matches;
+          source = "matchMedia";
+        } else {
+          isPortrait = window.innerHeight >= window.innerWidth;
+        }
+
+        return {
+          isPortrait: isPortrait,
+          isLandscape: !isPortrait,
+          type: isPortrait ? "portrait" : "landscape",
+          rawType: orientationType || (isPortrait ? "portrait" : "landscape"),
+          angle: orientationAngle,
+          width: window.innerWidth,
+          height: window.innerHeight,
+          source: source,
+          updatedAt: Date.now()
+        };
+      }
+
+      function emitOrientationChange() {
+        currentOrientationState = buildOrientationState();
+        window.dispatchEvent(new CustomEvent(ORIENTATION_EVENT_NAME, {
+          detail: currentOrientationState
+        }));
+        return currentOrientationState;
+      }
+
+      window.CCOrientationBridge = {
+        eventName: ORIENTATION_EVENT_NAME,
+        getState: function () {
+          return currentOrientationState || emitOrientationChange();
+        },
+        refresh: function () {
+          return emitOrientationChange();
+        }
+      };
+
+      if (window.screen && window.screen.orientation && typeof window.screen.orientation.addEventListener === "function") {
+        window.screen.orientation.addEventListener("change", emitOrientationChange);
+      }
+
+      window.addEventListener("orientationchange", emitOrientationChange);
+      window.addEventListener("resize", emitOrientationChange);
+      window.addEventListener("pageshow", emitOrientationChange);
+
+      document.addEventListener("visibilitychange", function () {
+        if (!document.hidden) {
+          emitOrientationChange();
+        }
+      });
+
+      emitOrientationChange();
+    })();
+  </script>
   
+<script src="./vconsole.min.js"></script>
+<script type="text/javascript">
+    // open web debugger console
+    window.VConsole && (window.vConsole = new VConsole());
+</script>
+
 
 <!-- Polyfills bundle. -->
 
@@ -154,7 +394,7 @@
 <script src="src/import-map.17abe.json" type="systemjs-importmap" charset="utf-8"> </script>
 
 <script>
-    System.import('./index.59ab9.js').catch(function(err) { console.error(err); })
+    System.import('./index.57a06.js').catch(function(err) { console.error(err); })
 </script>
 
 
