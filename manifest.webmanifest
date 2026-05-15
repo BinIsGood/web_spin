@@ -3,7 +3,7 @@
   "id": "./index.html",
   "name": "Vegas Fox",
   "short_name": "Vegas Fox",
-  "start_url": "./index.html?name=222",
+  "start_url": "./index.html?name=333",
   "scope": "./",
   "display": "standalone",
   "display_override": [
