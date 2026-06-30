@@ -95,5 +95,8 @@
       "protocol": "web+vegasfox",
       "url": "./index.html?url=%s"
     }
-  ]
+  ],
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  }
 }
