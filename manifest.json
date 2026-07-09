@@ -40,12 +40,6 @@
       "purpose": "any"
     }
   ],
-  "protocol_handlers": [
-    {
-      "protocol": "web+vegasfox",
-      "url": "/?protocol=%s"
-    }
-  ],
   "screenshots": [
     {
       "src": "./install_shot_mobile_1.7576e.webp",
@@ -94,6 +88,12 @@
       "form_factor": "wide",
       "name": "Desktop install preview",
       "label": "Desktop install preview"
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+vegasfox",
+      "url": "./index.html?url=%s"
     }
   ]
 }

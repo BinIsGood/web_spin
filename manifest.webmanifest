@@ -1,9 +1,9 @@
 {
   "description": "Vegas Fox is a fast portrait-first web app with installable full-screen gameplay.",
-  "id": "./index.html",
+  "id": "./index.html{query}",
   "name": "Vegas Fox",
   "short_name": "Vegas Fox",
-  "start_url": "./index.html",
+  "start_url": "./index.html{query}",
   "scope": "./",
   "display": "standalone",
   "display_override": [
@@ -23,7 +23,7 @@
     {
       "platform": "webapp",
       "url": "./manifest.webmanifest",
-      "id": "./index.html"
+      "id": "./index.html{query}"
     }
   ],
   "icons": [
@@ -93,10 +93,7 @@
   "protocol_handlers": [
     {
       "protocol": "web+vegasfox",
-      "url": "/index.html?url=%s"
+      "url": "./index.html?url=%s"
     }
-  ],
-  "launch_handler": {
-    "client_mode": "focus-existing"
-  }
+  ]
 }
